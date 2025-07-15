@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LNT College BCA Results</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #a8c0ff, #3f2b96); /* Gradient background */
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+
+        .header-animation {
+            animation: fadeInScale 2s ease-out forwards;
+        }
+
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .running-text-container {
+            overflow: hidden;
+            white-space: nowrap;
+            box-sizing: border-box;
+            width: 100%;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            padding: 0.5rem 0;
+            background: linear-gradient(90deg, #ff7e5f, #feb47b);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .running-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+
+        .dialog-box {
+            background: linear-gradient(45deg, #83a4d4, #4a75bb);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-table th, .result-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: left;
+        }
+
+        .result-table th {
+            background-color: #4a75bb;
+            color: white;
+            font-weight: bold;
+        }
+
+        .result-table tr:nth-child(even) {
+            background-color: #f0f4f8;
+        }
+
+        .result-table tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        .result-row-animation {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .colorful-text {
+            animation: colorChange 5s infinite alternate;
+        }
+
+        @keyframes colorChange {
+            0% { color: #FF5733; }
+            25% { color: #33FF57; }
+            50% { color: #3357FF; }
+            75% { color: #FF33F5; }
+            100% { color: #FF5733; }
+        }
+
+        .glowing-button {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        .glowing-button:hover {
+            background-color: #45a049;
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.6);
+            transform: translateY(-2px);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
+            70% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+        }
+
+        .logo-animation {
+            animation: rotateIn 1.5s ease-out forwards;
+        }
+
+        @keyframes rotateIn {
+            0% { opacity: 0; transform: rotateY(90deg); }
+            100% { opacity: 1; transform: rotateY(0deg); }
+        }
+
+        /* Custom scrollbar for result table */
+        .result-container::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        .result-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .result-container::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+            border: 3px solid #f1f1f1;
+        }
+
+        .result-container::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+    <div class="running-text-container">
+        <p class="running-text text-white text-lg font-bold">
+            <span class="colorful-text">𝓦𝓮𝓫𝓼𝓲𝓽𝓮 𝓓𝓮𝓼𝓲𝓰𝓷𝓮𝓻: 𝓚𝓪𝓻𝓪𝓷 𝓜𝓪𝓵𝓱𝓸𝓽𝓻𝓪</span> &nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="colorful-text">𝓦𝓮𝓫𝓼𝓲𝓽𝓮 𝓞𝔀𝓷𝓮𝓻: 𝓚𝓪𝓻𝓪𝓷 𝓡𝓪𝓳
+𝓢𝓽𝓾𝓭𝓮𝓷𝓽, 𝓛.𝓝.𝓣. 𝓒𝓸𝓵𝓵𝓮𝓰𝓮, 𝓜𝓾𝔃𝓪𝓯𝓯𝓪𝓻𝓹𝓾𝓻, 𝓑𝓲𝓱𝓪𝓻</span>
+        </p>
+    </div>
+
+    <div class="container">
+        <header class="text-center mb-10 header-animation">
+            <div class="flex flex-col items-center justify-center mb-4">
+                <!-- University Logo Placeholder (SVG for elegance) -->
+                <svg class="w-24 h-24 mb-4 logo-animation" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                    <path d="M2 17l10 5 10-5"></path>
+                    <path d="M2 12l10 5 10-5"></path>
+                </svg>
+                <h1 class="text-5xl font-extrabold text-indigo-800 mb-2 animate-pulse">
+                    BABASAHEB BHIMRAO AMBEDKAR BIHAR UNIVERSITY
+                </h1>
+                <h2 class="text-3xl font-bold text-purple-700">
+                    L. N. T. College, Muzaffarpur
+                </h2>
+                <p class="text-lg text-gray-600 mt-2">NAAC Accredited With 'B' Grade</p>
+            </div>
+            <h3 class="text-2xl font-semibold text-gray-700">BCA Provisional Results (2023-26 Batch)</h3>
+        </header>
+
+        <main>
+            <section class="search-section mb-10 p-6 dialog-box">
+                <h4 class="text-2xl font-bold text-white mb-4 text-center">Find Your Result</h4>
+                <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+                    <div class="w-full md:w-1/2">
+                        <label for="semester" class="block text-white text-lg font-semibold mb-2">Select Semester:</label>
+                        <select id="semester" class="w-full p-3 rounded-lg border-2 border-blue-300 focus:outline-none focus:border-blue-500 bg-white text-gray-800 shadow-md">
+                            <option value="">-- Select Semester --</option>
+                            <option value="1">1st Semester</option>
+                            <option value="2">2nd Semester</option>
+                            <option value="3">3rd Semester</option>
+                        </select>
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <label for="rollNumber" class="block text-white text-lg font-semibold mb-2">Enter Roll Number:</label>
+                        <input type="text" id="rollNumber" placeholder="e.g., 230804" class="w-full p-3 rounded-lg border-2 border-blue-300 focus:outline-none focus:border-blue-500 bg-white text-gray-800 shadow-md">
+                    </div>
+                </div>
+                <div class="text-center mt-8">
+                    <button id="searchButton" class="glowing-button">Get Result</button>
+                </div>
+            </section>
+
+            <section class="results-display">
+                <h4 class="text-3xl font-bold text-center text-indigo-700 mb-6">Your Result</h4>
+                <div id="resultOutput" class="result-container overflow-x-auto rounded-lg shadow-xl" style="max-height: 500px;">
+                    <!-- Results will be dynamically inserted here -->
+                    <p class="text-center text-gray-600 p-4">Please select a semester and enter a roll number to view results.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-10 text-gray-600 text-sm">
+            <p>&copy;2025 𝓛.𝓝.𝓣. 𝓒𝓸𝓵𝓵𝓮𝓰𝓮, 𝓜𝓾𝔃𝓪𝓯𝓯𝓪𝓻𝓹𝓾𝓻. 𝓐𝓵𝓵 𝓻𝓲𝓰𝓱𝓽𝓼 𝓻𝓮𝓼𝓮𝓻𝓿𝓮𝓭. 𝓦𝓮𝓫𝓼𝓲𝓽𝓮 𝓭𝓮𝓼𝓲𝓰𝓷𝓮𝓭 𝓪𝓷𝓭 𝓭𝓮𝓿𝓮𝓵𝓸𝓹𝓮𝓭 𝓫𝔂 𝓚𝓪𝓻𝓪𝓷 𝓜𝓪𝓵𝓱𝓸𝓽𝓻𝓪.</p>
+            <p class="mt-2"></p>
+        </footer>
+    </div>
+
+    <script>
+        // Sample Data (replace with actual data from your PDF or a database)
+        // This is a simplified representation. In a real application, you'd parse
+        // the PDF data more robustly or fetch it from a backend.
+        const allResults = [
+            // 1st Semester
+            { semester: 1, rollNo: '230804', name: 'KRISHAN MURARI', regNo: '1312021194020/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '45+17', '102 (Theory+Internal)': '56+17', '103 (Theory+Internal)': '31+18', '104 (Theory+Internal)': '52+18', '105 (Practical+Internal)': '69+17', '106 (Practical+Internal)': '70+18' }, total: '428', result: 'Pass' },
+            { semester: 1, rollNo: '230825', name: 'MOHAMMAD AYAN', regNo: '1312021194016/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '28+18', '102 (Theory+Internal)': '56+17', '103 (Theory+Internal)': '57+18', '104 (Theory+Internal)': '64+17', '105 (Practical+Internal)': '71+18', '106 (Practical+Internal)': '70+18' }, total: '452', result: 'Pass' },
+            { semester: 1, rollNo: '230807', name: 'MD SAHIL ANSARI', regNo: '1312021194017/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '52+19', '102 (Theory+Internal)': '60+17', '103 (Theory+Internal)': '53+19', '104 (Theory+Internal)': '49+19', '105 (Practical+Internal)': '72+18', '106 (Practical+Internal)': '73+18' }, total: '469', result: 'Pass' },
+            { semester: 1, rollNo: '230829', name: 'NIKHIL SRIVASTAVA', regNo: '1312021194015/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '14+15', '102 (Theory+Internal)': '41+16', '103 (Theory+Internal)': '52+18', '104 (Theory+Internal)': '52+17', '105 (Practical+Internal)': '66+16', '106 (Practical+Internal)': '67+17' }, total: '391', result: 'Fail in 101' },
+            { semester: 1, rollNo: '230817', name: 'MD SHAHID MAHTAB', regNo: '1312021194018/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '6+19', '102 (Theory+Internal)': '35+18', '103 (Theory+Internal)': '49+19', '104 (Theory+Internal)': '33+19', '105 (Practical+Internal)': '73+18', '106 (Practical+Internal)': '74+19' }, total: '382', result: 'Fail in 101' },
+            { semester: 1, rollNo: '230809', name: 'PRASHANT KUMAR', regNo: '1312021194010/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '30+19', '102 (Theory+Internal)': '48+17', '103 (Theory+Internal)': '47+18', '104 (Theory+Internal)': '48+19', '105 (Practical+Internal)': '65+18', '106 (Practical+Internal)': '66+18' }, total: '413', result: 'Pass' },
+            { semester: 1, rollNo: '230831', name: 'DHIRAJ KUMAR', regNo: '1312021194022/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '46+17', '102 (Theory+Internal)': '14+17', '103 (Theory+Internal)': '43+18', '104 (Theory+Internal)': '37+17', '105 (Practical+Internal)': '67+16', '106 (Practical+Internal)': '68+17' }, total: '377', result: 'Fail in 102' },
+            { semester: 1, rollNo: '230815', name: 'PAYAL KUMARI', regNo: '1312021194011/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '46+18', '102 (Theory+Internal)': '49+17', '103 (Theory+Internal)': '45+19', '104 (Theory+Internal)': '54+18', '105 (Practical+Internal)': '72+18', '106 (Practical+Internal)': '71+18' }, total: '445', result: 'Pass' },
+            { semester: 1, rollNo: '230830', name: 'DEEPAK KUMAR', regNo: '1312021194023/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '11+16', '102 (Theory+Internal)': '53+15', '103 (Theory+Internal)': '61+17', '104 (Theory+Internal)': '49+16', '105 (Practical+Internal)': '64+15', '106 (Practical+Internal)': '63+16' }, total: '396', result: 'Fail in 101' },
+            { semester: 1, rollNo: '230811', name: 'SIRISH KUMAR', regNo: '1312021194001/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '25+18', '102 (Theory+Internal)': '58+19', '103 (Theory+Internal)': '30+19', '104 (Theory+Internal)': '58+19', '105 (Practical+Internal)': '70+18', '106 (Practical+Internal)': '71+19' }, total: '424', result: 'Pass' },
+            { semester: 1, rollNo: '230810', name: 'KARAN RAJ', regNo: '1312021194021/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '55+18', '102 (Theory+Internal)': '54+18', '103 (Theory+Internal)': '42+19', '104 (Theory+Internal)': '46+18', '105 (Practical+Internal)': '65+18', '106 (Practical+Internal)': '66+18' }, total: '437', result: 'Pass' },
+            { semester: 1, rollNo: '230819', name: 'VIPUL KUMAR', regNo: '1312021194003/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '44+19', '102 (Theory+Internal)': '51+17', '103 (Theory+Internal)': '63+19', '104 (Theory+Internal)': '51+18', '105 (Practical+Internal)': '71+18', '106 (Practical+Internal)': '72+18' }, total: '461', result: 'Pass' },
+            { semester: 1, rollNo: '230808', name: 'SUBHAM KUMAR', regNo: '1312021194006/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '53+16', '102 (Theory+Internal)': '58+16', '103 (Theory+Internal)': '50+18', '104 (Theory+Internal)': '34+17', '105 (Practical+Internal)': '65+18', '106 (Practical+Internal)': '66+17' }, total: '428', result: 'Pass' },
+            { semester: 1, rollNo: '230824', name: 'ABHISHEK KUMAR', regNo: '1312021194028/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '27+18', '102 (Theory+Internal)': '50+17', '103 (Theory+Internal)': '48+18', '104 (Theory+Internal)': '54+17', '105 (Practical+Internal)': '70+18', '106 (Practical+Internal)': '71+18' }, total: '426', result: 'Pass' },
+            { semester: 1, rollNo: '230820', name: 'ROHIT KUMAR', regNo: '1312021194008/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '45+17', '102 (Theory+Internal)': '53+17', '103 (Theory+Internal)': '61+18', '104 (Theory+Internal)': '53+17', '105 (Practical+Internal)': '71+18', '106 (Practical+Internal)': '70+18' }, total: '458', result: 'Pass' },
+            { semester: 1, rollNo: '230818', name: 'MANISH KUMAR', regNo: '1312021194019/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '42+17', '102 (Theory+Internal)': '41+15', '103 (Theory+Internal)': '54+18', '104 (Theory+Internal)': '52+18', '105 (Practical+Internal)': '69+18', '106 (Practical+Internal)': '68+17' }, total: '429', result: 'Pass' },
+            { semester: 1, rollNo: '230821', name: 'ANSHU KUMAR', regNo: '1312021194025/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '44+18', '102 (Theory+Internal)': '47+17', '103 (Theory+Internal)': '50+18', '104 (Theory+Internal)': '50+18', '105 (Practical+Internal)': '73+18', '106 (Practical+Internal)': '74+18' }, total: '445', result: 'Pass' },
+            { semester: 1, rollNo: '230827', name: 'NISHA KUMARI', regNo: '1312021194014/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '47+18', '102 (Theory+Internal)': '52+18', '103 (Theory+Internal)': '64+18', '104 (Theory+Internal)': '49+18', '105 (Practical+Internal)': '73+18', '106 (Practical+Internal)': '74+18' }, total: '467', result: 'Pass' },
+            { semester: 1, rollNo: '230822', name: 'RASHID IMTIYAZ', regNo: '1312021194009/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '40+19', '102 (Theory+Internal)': '44+17', '103 (Theory+Internal)': '53+19', '104 (Theory+Internal)': '39+19', '105 (Practical+Internal)': '73+18', '106 (Practical+Internal)': '72+18' }, total: '431', result: 'Pass' },
+            { semester: 1, rollNo: '230828', name: 'PRAGATI SHARMA', regNo: '1312021194012/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '38+17', '102 (Theory+Internal)': '47+17', '103 (Theory+Internal)': '50+18', '104 (Theory+Internal)': '43+18', '105 (Practical+Internal)': '68+15', '106 (Practical+Internal)': '69+17' }, total: '417', result: 'Pass' },
+            { semester: 1, rollNo: '230814', name: 'AMAN KUMAR', regNo: '1312021194026/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '16+19', '102 (Theory+Internal)': '53+17', '103 (Theory+Internal)': '43+19', '104 (Theory+Internal)': '50+18', '105 (Practical+Internal)': '73+18', '106 (Practical+Internal)': '74+18' }, total: '418', result: 'Fail in 101' },
+            { semester: 1, rollNo: '230826', name: 'RISHU RAJ', regNo: '1312021194002/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '48+16', '102 (Theory+Internal)': '37+17', '103 (Theory+Internal)': '53+17', '104 (Theory+Internal)': '47+17', '105 (Practical+Internal)': '67+17', '106 (Practical+Internal)': '69+17' }, total: '422', result: 'Pass' },
+            { semester: 1, rollNo: '230816', name: 'VAIBHAV KUMAR', regNo: '1312021194005/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '34+16', '102 (Theory+Internal)': '38+16', '103 (Theory+Internal)': '34+18', '104 (Theory+Internal)': '42+18', '105 (Practical+Internal)': '68+16', '106 (Practical+Internal)': '69+17' }, total: '386', result: 'Pass' },
+            { semester: 1, rollNo: '230813', name: 'NITYAM RAJ', regNo: '1312021194013/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '41+17', '102 (Theory+Internal)': '41+17', '103 (Theory+Internal)': '44+18', '104 (Theory+Internal)': '42+17', '105 (Practical+Internal)': '69+17', '106 (Practical+Internal)': '70+17' }, total: '410', result: 'Pass' },
+            { semester: 1, rollNo: '230812', name: 'ADITYA KUMAR', regNo: '1312021194027/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '35+18', '102 (Theory+Internal)': '46+18', '103 (Theory+Internal)': '40+19', '104 (Theory+Internal)': '56+18', '105 (Practical+Internal)': '72+18', '106 (Practical+Internal)': '71+18' }, total: '429', result: 'Pass' },
+            { semester: 1, rollNo: '230805', name: 'AYUSH KUMAR SINGH', regNo: '1312021194024/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '43+19', '102 (Theory+Internal)': '48+18', '103 (Theory+Internal)': '36+18', '104 (Theory+Internal)': '39+18', '105 (Practical+Internal)': '72+18', '106 (Practical+Internal)': '73+18' }, total: '420', result: 'Pass' },
+            { semester: 1, rollNo: '230806', name: 'SACHIN KUMAR', regNo: '1312021194007/23', college: 'L. N. T. College, Muzaffarpur', papers: { '101 (Theory+Internal)': '52+17', '102 (Theory+Internal)': '54+17', '103 (Theory+Internal)': '56+18', '104 (Theory+Internal)': '52+18', '105 (Practical+Internal)': '71+18', '106 (Practical+Internal)': '70+18' }, total: '461', result: 'Pass' },
+
+            // 2nd Semester
+            { semester: 2, rollNo: '230804', name: 'KRISHAN MURARI', regNo: '131201119402023/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '35+14', '202 (Theory+Internal)': '51+17', '203 (Theory+Internal)': '48+17', '204 (Theory+Internal)': '52+17', '205 (Practical+Internal)': '69+17', '206 (Practical+Internal)': '70+15' }, total: '422', result: 'Pass' },
+            { semester: 2, rollNo: '230812', name: 'ADITYA KUMAR', regNo: '131201119402723/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '57+18', '202 (Theory+Internal)': '51+19', '203 (Theory+Internal)': '48+19', '204 (Theory+Internal)': '50+18', '205 (Practical+Internal)': '73+19', '206 (Practical+Internal)': '74+19' }, total: '465', result: 'Pass' },
+            { semester: 2, rollNo: '230810', name: 'KARAN RAJ', regNo: '131201119402123/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '51+17', '202 (Theory+Internal)': '48+18', '203 (Theory+Internal)': '43+19', '204 (Theory+Internal)': '50+18', '205 (Practical+Internal)': '72+18', '206 (Practical+Internal)': '73+18' }, total: '445', result: 'Pass' },
+            { semester: 2, rollNo: '230825', name: 'MOHAMMAD AYAN', regNo: '131201119401623/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '57+16', '202 (Theory+Internal)': '42+18', '203 (Theory+Internal)': '58+17', '204 (Theory+Internal)': '58+17', '205 (Practical+Internal)': '68+18', '206 (Practical+Internal)': '69+17' }, total: '455', result: 'Pass' },
+            { semester: 2, rollNo: '230827', name: 'NISHA KUMARI', regNo: '131201119401423/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '57+18', '202 (Theory+Internal)': '49+19', '203 (Theory+Internal)': '53+19', '204 (Theory+Internal)': '58+19', '205 (Practical+Internal)': '75+19', '206 (Practical+Internal)': '76+19' }, total: '481', result: 'Pass' },
+            { semester: 2, rollNo: '230807', name: 'MD SAHIL ANSARI', regNo: '131201119401723/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '50+16', '202 (Theory+Internal)': '51+18', '203 (Theory+Internal)': '57+17', '204 (Theory+Internal)': '58+17', '205 (Practical+Internal)': '68+18', '206 (Practical+Internal)': '72+17' }, total: '459', result: 'Pass' },
+            { semester: 2, rollNo: '230816', name: 'VAIBHAV KUMAR', regNo: '131201119400523/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '41+14', '202 (Theory+Internal)': '42+17', '203 (Theory+Internal)': '39+15', '204 (Theory+Internal)': '31+15', '205 (Practical+Internal)': '66+17', '206 (Practical+Internal)': '67+15' }, total: '379', result: 'Pass' },
+            { semester: 2, rollNo: '230826', name: 'RISHU RAJ', regNo: '131201119400223/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '54+15', '202 (Theory+Internal)': '43+16', '203 (Theory+Internal)': '40+15', '204 (Theory+Internal)': '43+15', '205 (Practical+Internal)': '65+16', '206 (Practical+Internal)': '65+16' }, total: '403', result: 'Pass' },
+            { semester: 2, rollNo: '230830', name: 'DEEPAK KUMAR', regNo: '131201119402323/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '56+15', '202 (Theory+Internal)': '67+17', '203 (Theory+Internal)': '58+16', '204 (Theory+Internal)': '56+15', '205 (Practical+Internal)': '66+17', '206 (Practical+Internal)': '70+16' }, total: '469', result: 'Pass' },
+            { semester: 2, rollNo: '230824', name: 'ABHISHEK KUMAR', regNo: '131201119402823/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '36+14', '202 (Theory+Internal)': '32+17', '203 (Theory+Internal)': '53+16', '204 (Theory+Internal)': '51+16', '205 (Practical+Internal)': '66+17', '206 (Practical+Internal)': '67+15' }, total: '400', result: 'Pass' },
+            { semester: 2, rollNo: '230818', name: 'MANISH KUMAR', regNo: '131201119401923/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '54+16', '202 (Theory+Internal)': '36+18', '203 (Theory+Internal)': '47+18', '204 (Theory+Internal)': '43+18', '205 (Practical+Internal)': '70+18', '206 (Practical+Internal)': '71+17' }, total: '426', result: 'Pass' },
+            { semester: 2, rollNo: '230815', name: 'PAYAL KUMARI', regNo: '131201119401123/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '46+18', '202 (Theory+Internal)': '49+19', '203 (Theory+Internal)': '46+19', '204 (Theory+Internal)': '50+19', '205 (Practical+Internal)': '75+19', '206 (Practical+Internal)': '76+19' }, total: '455', result: 'Pass' },
+            { semester: 2, rollNo: '230819', name: 'VIPUL KUMAR', regNo: '131201119400323/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '58+18', '202 (Theory+Internal)': '52+19', '203 (Theory+Internal)': '56+18', '204 (Theory+Internal)': '60+18', '205 (Practical+Internal)': '73+19', '206 (Practical+Internal)': '73+18' }, total: '482', result: 'Pass' },
+            { semester: 2, rollNo: '230829', name: 'NIKHIL SRIVASTAVA', regNo: '131201119401523/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '51+14', '202 (Theory+Internal)': '42+16', '203 (Theory+Internal)': '46+16', '204 (Theory+Internal)': '50+14', '205 (Practical+Internal)': '69+16', '206 (Practical+Internal)': '68+15' }, total: '417', result: 'Pass' },
+            { semester: 2, rollNo: '230811', name: 'SIRISH KUMAR', regNo: '131201119400123/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '61+19', '202 (Theory+Internal)': '34+19', '203 (Theory+Internal)': '53+20', '204 (Theory+Internal)': '56+19', '205 (Practical+Internal)': '76+19', '206 (Practical+Internal)': '76+20' }, total: '472', result: 'Pass' },
+            { semester: 2, rollNo: '230828', name: 'PRAGATI SHARMA', regNo: '131201119401223/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '42+16', '202 (Theory+Internal)': '29+18', '203 (Theory+Internal)': '57+18', '204 (Theory+Internal)': '53+18', '205 (Practical+Internal)': '70+18', '206 (Practical+Internal)': '71+17' }, total: '427', result: 'Pass' },
+            { semester: 2, rollNo: '230822', name: 'RASHID IMTIYAZ', regNo: '131201119400923/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '45+14', '202 (Theory+Internal)': '46+18', '203 (Theory+Internal)': '48+16', '204 (Theory+Internal)': '50+17', '205 (Practical+Internal)': '65+18', '206 (Practical+Internal)': '66+15' }, total: '418', result: 'Pass' },
+            { semester: 2, rollNo: '230808', name: 'SUBHAM KUMAR', regNo: '131201119400623/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '43+14', '202 (Theory+Internal)': '45+17', '203 (Theory+Internal)': '48+16', '204 (Theory+Internal)': '38+17', '205 (Practical+Internal)': '65+17', '206 (Practical+Internal)': '70+15' }, total: '405', result: 'Pass' },
+            { semester: 2, rollNo: '230820', name: 'ROHIT KUMAR', regNo: '131201119400823/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '54+15', '202 (Theory+Internal)': '50+18', '203 (Theory+Internal)': '46+16', '204 (Theory+Internal)': '45+16', '205 (Practical+Internal)': '65+18', '206 (Practical+Internal)': '66+16' }, total: '425', result: 'Pass' },
+            { semester: 2, rollNo: '230809', name: 'PRASHANT KUMAR', regNo: '131201119401023/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '50+18', '202 (Theory+Internal)': '43+18', '203 (Theory+Internal)': '50+18', '204 (Theory+Internal)': '48+17', '205 (Practical+Internal)': '71+18', '206 (Practical+Internal)': '72+19' }, total: '442', result: 'Pass' },
+            { semester: 2, rollNo: '230813', name: 'NITYAM RAJ', regNo: '131201119401323/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '53+18', '202 (Theory+Internal)': '47+19', '203 (Theory+Internal)': '41+17', '204 (Theory+Internal)': '39+17', '205 (Practical+Internal)': '71+19', '206 (Practical+Internal)': '72+19' }, total: '432', result: 'Pass' },
+            { semester: 2, rollNo: '230817', name: 'MD SHAHID MAHTAB', regNo: '131201119401823/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '46+17', '202 (Theory+Internal)': '30+19', '203 (Theory+Internal)': '50+19', '204 (Theory+Internal)': '33+19', '205 (Practical+Internal)': '74+19', '206 (Practical+Internal)': '75+18' }, total: '419', result: 'Pass' },
+            { semester: 2, rollNo: '230814', name: 'AMAN KUMAR', regNo: '131201119402623/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '54+15', '202 (Theory+Internal)': '36+17', '203 (Theory+Internal)': '47+17', '204 (Theory+Internal)': '37+18', '205 (Practical+Internal)': '67+17', '206 (Practical+Internal)': '68+16' }, total: '409', result: 'Pass' },
+            { semester: 2, rollNo: '230821', name: 'ANSHU KUMAR', regNo: '131201119402523/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '45+17', '202 (Theory+Internal)': '59+19', '203 (Theory+Internal)': '61+17', '204 (Theory+Internal)': '48+16', '205 (Practical+Internal)': '72+19', '206 (Practical+Internal)': '73+18' }, total: '464', result: 'Pass' },
+            { semester: 2, rollNo: '230831', name: 'DHIRAJ KUMAR', regNo: '131201119402223/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '14+14', '202 (Theory+Internal)': '41+16', '203 (Theory+Internal)': '54+15', '204 (Theory+Internal)': '35+14', '205 (Practical+Internal)': '66+16', '206 (Practical+Internal)': '70+15' }, total: '370', result: 'Fail in Paper201' },
+            { semester: 2, rollNo: '230805', name: 'AYUSH KUMAR SINGH', regNo: '131201119402423/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '40+18', '202 (Theory+Internal)': '45+19', '203 (Theory+Internal)': '36+19', '204 (Theory+Internal)': '45+18', '205 (Practical+Internal)': '74+19', '206 (Practical+Internal)': '76+20' }, total: '429', result: 'Pass' },
+            { semester: 2, rollNo: '230806', name: 'SACHIN KUMAR', regNo: '131201119400723/23', college: 'L. N. T. College, Muzaffarpur', papers: { '201 (Theory+Internal)': '45+18', '202 (Theory+Internal)': '51+19', '203 (Theory+Internal)': '54+19', '204 (Theory+Internal)': '50+18', '205 (Practical+Internal)': '74+19', '206 (Practical+Internal)': '75+19' }, total: '461', result: 'Pass' },
+
+            // 3rd Semester
+            { semester: 3, rollNo: '230804', name: 'KRISHAN MURARI', regNo: '131201119402023/23', college: 'L. N. T. College, Muzaffarpur', papers: { '301 (Theory+Internal)': '50+18', '302 (Theory+Internal)': '51+17', '303 (Theory+Internal)': '44+17', '304 (Theory+Internal)': '53+19', '305 (Practical+Internal)': '70+18', '306 (Practical+Internal)': '71+17' }, total: '445', result: 'Pass' },
+            { semester: 3, rollNo: '230811', name: 'SIRISH KUMAR', regNo: '131201119400123/23', college: 'L. N. T. College, Muzaffarpur', papers: { '301 (Theory+Internal)': '48+18', '302 (Theory+Internal)': '46+19', '303 (Theory+Internal)': '48+19', '304 (Theory+Internal)': '48+19', '305 (Practical+Internal)': '72+18', '306 (Practical+Internal)': '73+19' }, total: '447', result: 'Pass' },
+            { semester: 3, rollNo: '230807', name: 'MD SAHIL ANSARI', regNo: '131201119401723/23', college: 'L. N. T. College, Muzaffarpur', papers: { '301 (Theory+Internal)': '46+19', '302 (Theory+Internal)': '55+17', '303 (Theory+Internal)': '60+18', '304 (Theory+Internal)': '62+19', '305 (Practical+Internal)': '75+19', '306 (Practical+Internal)': '74+17' }, total: '481', result: 'Pass' },
+            { semester: 3, rollNo: '230829', name: 'NIKHIL SRIVASTAVA', regNo: '1312021194015/23', college: 'L. N. T. College, Muzaffarpur', papers: { '301 (Theory+Internal)': '52+17', '302 (Theory+Internal)': '55+18', '303 (Theory+Internal)': '52+16', '304 (Theory+Internal)': '18+19', '305 (Practical+Internal)': '71+17', '306 (Practical+Internal)': '72+17' }, total: '424', result: 'Fail in Paper304' },
+            { semester: 3, rollNo: '230813', name: 'NITYAM RAJ', regNo: '1312011194013/23', college: 'L. N. T. College, Muzaffarpur', papers: { '301 (Theory+Internal)': '56+19', '302 (Theory+Internal)': '42+19', '303 (Theory+Internal)': '48+20', '304 (Theory+Internal)': '43+19', '305 (Practical+Internal)': '71+19', '306 (Practical+Internal)': '72+17' }, total: '445', result: 'Pass' },
+            { semester: 3, rollNo: '230821', name: 'ANSHU KUMAR', regNo: '131201119402523/23', college: 'L. N. T. College, Muzaffarpur', papers: { '301 (Theory+Internal)': '50+19', '302 (Theory+Internal)': '47+19', '303 (Theory+Internal)': '50+19', '304 (Theory+Internal)': '56+19', '305 (Practical+Internal)': '74+19', '306 (Practical+Internal)': '75+19' }, total: '466', result: 'Pass' },
+            { semester: 3, rollNo: '230812', name: 'ADITYA KUMAR', regNo: '1312011194027/23', college: 'L. N. T. College, Muzaffarpur', papers: { '301 (Theory+Internal)': '47+19', '302 (Theory+Internal)': '47+19', '303 (Theory+Internal)': '50+20', '304 (Theory+Internal)': '54+19', '305 (Practical+Internal)': '72+19', '306 (Practical+Internal)': '73+17' }, total: '456', result: 'Pass' },
+            { semester: 3, rollNo: '230810', name: 'KARAN RAJ', regNo: '131201119402123/23', college: 'L. N. T. College, Muzaffarpur', papers: { '301 (Theory+Internal)': '54+17', '302 (Theory+Internal)': '45+18', '303 (Theory+Internal)': '52+17', '304 (Theory+Internal)': '48+18', '305 (Practical+Internal)': '70+17', '306 (Practical+Internal)': '72+17' }, total: '445', result: 'Pass' },
+            { semester: 3, rollNo: '230809', name: 'PRASHANT KUMAR', regNo: '1312011194010/23', college: 'L. N. T. College, Muzaffarpur', papers: { '301 (Theory+Internal)': '50+16', '302 (Theory+Internal)': '49+18', '303 (Theory+Internal)': '52+18', '304 (Theory+Internal)': '49+18', '305 (Practical+Internal)': '71+16', '306 (Practical+Internal)': '70+17' }, total: '444', result: 'Pass' },
+            { semester: 3, rollNo: '230814', name: 'AMAN KUMAR', regNo: '1312011194026/23', college: 'L. N. T. College, Muzaffarpur', papers: { '301 (Theory+Internal)': '60+16', '302 (Theory+Internal)': '45+18', '303 (Theory+Internal)': '54+17', '304 (Theory+Internal)': '50+18', '305 (Practical+Internal)': '74+16', '306 (Practical+Internal)': '75+19' }, total: '462', result: 'Pass' },
+            { semester: 3, rollNo: '230815', name: 'PAYAL KUMARI', regNo: '1312011194011/23', college: 'L. N. T. College, Muzaffarpur', papers: { '301 (Theory+Internal)': '55+19', '302 (Theory+Internal)': '41+18', '303 (Theory+Internal)': '48+18', '304 (Theory+Internal)': '41+19', '305 (Practical+Internal)': '72+19', '306 (Practical+Internal)': '73+16' }, total: '439', result: 'Pass' },
+            { semester: 3, rollNo: '230816', name: 'VAIBHAV KUMAR', regNo: '131201119400523/23', college: 'L. N. T. College, Muzaffarpur', papers: { '301 (Theory+Internal)': '48+16', '302 (Theory+Internal)': '40+16', '303 (Theory+Internal)': '45+18', '304 (Theory+Internal)': '17+18', '305 (Practical+Internal)': '73+16', '306 (Practical+Internal)': '71+17' }, total: '395', result: 'Fail in Paper304' },
+            { semester: 3, rollNo: '230820', name: 'ROHIT KUMAR', regNo: '1312011194008/23', college: 'L. N. T. College, Muzaffarpur', papers: { '301 (Theory+Internal)': '52+16', '302 (Theory+Internal)': '53+17', '303 (Theory+Internal)': '47+19', '304 (Theory+Internal)': '50+18', '305 (Practical+Internal)': '72+16', '306 (Practical+Internal)': '73+18' }, total: '451', result: 'Pass' },
+            { semester: 3, rollNo: '230817', name: 'MD. SHAHID MAHTAB', regNo: '131201119401823/23', college: 'L. N. T. College, Muzaffarpur', papers: { '301 (Theory+Internal)': '33+16', '302 (Theory+Internal)': '50+17', '303 (Theory+Internal)': '44+20', '304 (Theory+Internal)': '38+18', '305 (Practical+Internal)': '72+16', '306 (Practical+Internal)': '73+17' }, total: '414', result: 'Pass' },
+            { semester: 3, rollNo: '230822', name: 'RASHID IMTIYAZ', regNo: '131201119400923/23', college: 'L. N. T. College, Muzaffarpur', papers: { '301 (Theory+Internal)': '58+19', '302 (Theory+Internal)': '40+18', '303 (Theory+Internal)': '66+19', '304 (Theory+Internal)': '53+19', '305 (Practical+Internal)': '70+19', '306 (Practical+Internal)': '71+17' }, total: '469', result: 'Pass' },
+            { semester: 3, rollNo: '230808', name: 'SUBHAM KUMAR', regNo: '1312011194006/23', college: 'L. N. T. College, Muzaffarpur', papers: { '301 (Theory+Internal)': '35+18', '302 (Theory+Internal)': '40+18', '303 (Theory+Internal)': '34+17', '304 (Theory+Internal)': '34+18', '305 (Practical+Internal)': '73+18', '306 (Practical+Internal)': '74+17' }, total: '396', result: 'Pass' },
+            { semester: 3, rollNo: '230828', name: 'PRAGATI SHARMA', regNo: '1312011194012/23', college: 'L. N. T. College, Muzaffarpur', papers: { '301 (Theory+Internal)': '48+19', '302 (Theory+Internal)': '42+19', '303 (Theory+Internal)': '48+19', '304 (Theory+Internal)': '59+19', '305 (Practical+Internal)': '72+19', '306 (Practical+Internal)': '73+17' }, total: '454', result: 'Pass' },
+            { semester: 3, rollNo: '230819', name: 'VIPUL KUMAR', regNo: '131201119400323/23', college: 'L. N. T. College, Muzaffarpur', papers: { '301 (Theory+Internal)': '55+18', '302 (Theory+Internal)': '45+18', '303 (Theory+Internal)': '64+19', '304 (Theory+Internal)': '46+19', '305 (Practical+Internal)': '73+18', '306 (Practical+Internal)': '72+17' }, total: '464', result: 'Pass' },
+            { semester: 3, rollNo: '230818', name: 'MANISH KUMAR', regNo: '131201119401923/23', college: 'L. N. T. College, Muzaffarpur', papers: { '301 (Theory+Internal)': '50+18', '302 (Theory+Internal)': '49+17', '303 (Theory+Internal)': '54+18', '304 (Theory+Internal)': '49+18', '305 (Practical+Internal)': '72+18', '306 (Practical+Internal)': '73+16' }, total: '452', result: 'Pass' },
+            { semester: 3, rollNo: '230827', name: 'NISHA KUMARI', regNo: '1312011194014/23', college: 'L. N. T. College, Muzaffarpur', papers: { '301 (Theory+Internal)': '55+19', '302 (Theory+Internal)': '44+19', '303 (Theory+Internal)': '52+19', '304 (Theory+Internal)': '56+19', '305 (Practical+Internal)': '71+19', '306 (Practical+Internal)': '70+18' }, total: '461', result: 'Pass' },
+            { semester: 3, rollNo: '230830', name: 'DEEPAK KUMAR', regNo: '1312011194023/23', college: 'L. N. T. College, Muzaffarpur', papers: { '301 (Theory+Internal)': '50+17', '302 (Theory+Internal)': '47+17', '303 (Theory+Internal)': '46+16', '304 (Theory+Internal)': '48+19', '305 (Practical+Internal)': '72+17', '306 (Practical+Internal)': '71+16' }, total: '436', result: 'Pass' },
+            { semester: 3, rollNo: '230826', name: 'RISHU RAJ', regNo: '131201119400223/23', college: 'L. N. T. College, Muzaffarpur', papers: { '301 (Theory+Internal)': '51+17', '302 (Theory+Internal)': '43+18', '303 (Theory+Internal)': '38+16', '304 (Theory+Internal)': '45+18', '305 (Practical+Internal)': '70+17', '306 (Practical+Internal)': '71+17' }, total: '421', result: 'Pass' },
+            { semester: 3, rollNo: '230825', name: 'MOHAMMAD AYAN', regNo: '131201119401623/23', college: 'L. N. T. College, Muzaffarpur', papers: { '301 (Theory+Internal)': '50+19', '302 (Theory+Internal)': '50+18', '303 (Theory+Internal)': '61+18', '304 (Theory+Internal)': '44+19', '305 (Practical+Internal)': '71+19', '306 (Practical+Internal)': '70+18' }, total: '457', result: 'Pass' },
+            { semester: 3, rollNo: '230805', name: 'AYUSH KUMAR SINGH', regNo: '1312011194024/23', college: 'L. N. T. College, Muzaffarpur', papers: { '301 (Theory+Internal)': '34+19', '302 (Theory+Internal)': '51+19', '303 (Theory+Internal)': '50+20', '304 (Theory+Internal)': '57+19', '305 (Practical+Internal)': '72+19', '306 (Practical+Internal)': '73+18' }, total: '451', result: 'Pass' },
+            { semester: 3, rollNo: '230806', name: 'SACHIN KUMAR', regNo: '1312011194007/23', college: 'L. N. T. College, Muzaffarpur', papers: { '301 (Theory+Internal)': '50+18', '302 (Theory+Internal)': '45+18', '303 (Theory+Internal)': '54+18', '304 (Theory+Internal)': '56+18', '305 (Practical+Internal)': '70+18', '306 (Practical+Internal)': '71+17' }, total: '453', result: 'Pass' },
+        ];
+
+        document.getElementById('searchButton').addEventListener('click', displayResult);
+        document.getElementById('rollNumber').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                displayResult();
+            }
+        });
+
+        function displayResult() {
+            const semester = document.getElementById('semester').value;
+            const rollNumber = document.getElementById('rollNumber').value.trim();
+            const resultOutput = document.getElementById('resultOutput');
+
+            if (!semester || !rollNumber) {
+                resultOutput.innerHTML = `<p class="text-center text-red-600 p-4 font-semibold">Please select a semester and enter a roll number.</p>`;
+                return;
+            }
+
+            const foundResult = allResults.find(
+                r => r.semester == semester && r.rollNo === rollNumber
+            );
+
+            if (foundResult) {
+                let papersHtml = '';
+                for (const paper in foundResult.papers) {
+                    papersHtml += `<tr class="result-row-animation">
+                                    <td class="px-4 py-2 text-gray-700">${paper}</td>
+                                    <td class="px-4 py-2 text-gray-700">${foundResult.papers[paper]}</td>
+                                  </tr>`;
+                }
+
+                const resultColor = foundResult.result.includes('Fail') ? 'text-red-600' : 'text-green-600';
+
+                resultOutput.innerHTML = `
+                    <table class="min-w-full bg-white rounded-lg overflow-hidden result-table">
+                        <thead>
+                            <tr>
+                                <th colspan="2" class="py-3 px-4 bg-indigo-600 text-white text-xl font-bold rounded-t-lg">Student Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="result-row-animation">
+                                <td class="px-4 py-2 font-semibold text-indigo-700">Roll No:</td>
+                                <td class="px-4 py-2 text-gray-700">${foundResult.rollNo}</td>
+                            </tr>
+                            <tr class="result-row-animation">
+                                <td class="px-4 py-2 font-semibold text-indigo-700">Name:</td>
+                                <td class="px-4 py-2 text-gray-700">${foundResult.name}</td>
+                            </tr>
+                            <tr class="result-row-animation">
+                                <td class="px-4 py-2 font-semibold text-indigo-700">Reg. No.:</td>
+                                <td class="px-4 py-2 text-gray-700">${foundResult.regNo}</td>
+                            </tr>
+                            <tr class="result-row-animation">
+                                <td class="px-4 py-2 font-semibold text-indigo-700">College:</td>
+                                <td class="px-4 py-2 text-gray-700">${foundResult.college}</td>
+                            </tr>
+                            <tr class="result-row-animation">
+                                <td class="px-4 py-2 font-semibold text-indigo-700">Semester:</td>
+                                <td class="px-4 py-2 text-gray-700">${foundResult.semester}</td>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th colspan="2" class="py-3 px-4 bg-indigo-600 text-white text-xl font-bold mt-4">Paper-wise Marks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${papersHtml}
+                        </tbody>
+                        <tfoot>
+                            <tr class="result-row-animation">
+                                <td class="px-4 py-2 font-semibold text-indigo-700">Total Marks:</td>
+                                <td class="px-4 py-2 text-gray-700">${foundResult.total}</td>
+                            </tr>
+                            <tr class="result-row-animation">
+                                <td class="px-4 py-2 font-semibold text-indigo-700">Result:</td>
+                                <td class="px-4 py-2 font-bold ${resultColor}">${foundResult.result}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                `;
+            } else {
+                resultOutput.innerHTML = `<p class="text-center text-red-600 p-4 font-semibold">No result found for Roll Number "${rollNumber}" in Semester "${semester}".</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
